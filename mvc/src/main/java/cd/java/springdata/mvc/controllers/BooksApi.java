@@ -30,7 +30,7 @@ public class BooksApi {
 	}
 	
 	@GetMapping("/api/books")
-	public List<Book> index() {
+	public List<Book> readAll() {
 		return bookService.allBooks();
 	}
 	
@@ -41,15 +41,22 @@ public class BooksApi {
 	}
 	
 	@GetMapping("/api/books/{id}")
-	public Book show(@PathVariable Long id) {
+	public Book readOne(@PathVariable Long id) {
 		Book book = bookService.findBook(id);
 		return book;
 	}
 	
 	@PutMapping("/api/books/{id}")
 	public Book update(@PathVariable Long id, @RequestParam String title, @RequestParam(value="description") String desc, @RequestParam(value="language") String lang, @RequestParam(value="numberOfPages") Integer pages) {
-		Book book = bookService.updateBook(id, title, desc, lang, pages);
-		return book;
+		//Book book = bookService.updateBook(id, title, desc, lang, pages);
+		Book book = bookService.findBook(id);
+		if(book != null) {
+			book.setTitle(title);
+			book.setDescription(desc);
+			book.setLanguage(lang);
+			book.setNumberOfPages(pages);
+		}
+		return bookService.updateBook(book);
 	}
 	
 	@DeleteMapping("/api/books/{id}")

@@ -46,18 +46,7 @@ public class BookService {
 	}
 	
 	// updates a book
-	public Book updateBook(Long id, String title, String description, String language, Integer numberOfPages) {
-		Book b = null;
-		Optional<Book> optionalBook = bookRepository.findById(id);
-		if(optionalBook.isPresent()) {
-			b = optionalBook.get();
-		} else {
-			b = new Book();
-		}
-		b.setTitle(title);
-		b.setDescription(description);
-		b.setLanguage(language);
-		b.setNumberOfPages(numberOfPages);
+	public Book updateBook(Book b) {
 		return bookRepository.save(b);
 	}
 	
