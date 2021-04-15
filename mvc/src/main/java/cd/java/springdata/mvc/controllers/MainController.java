@@ -1,0 +1,21 @@
+/**
+ * 
+ */
+package cd.java.springdata.mvc.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+/**
+ * @author ccomstock
+ *
+ */
+@Controller
+public class MainController {
+	
+	@GetMapping("/")
+	public String root() {
+		return "redirect:/books";
+	}
+	
+}
